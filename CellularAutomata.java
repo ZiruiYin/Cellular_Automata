@@ -10,9 +10,9 @@ public class CellularAutomata {
                 if (s[k - 1].equals("#") && s[k + 1].equals("-")){
                     copy[k] = "#";
                 }
-                else if (s[k + 1].equals("#") && s[k - 1].equals("-")){
-                  copy[k] = "#";
-                }
+                //else if (s[k + 1].equals("#") && s[k - 1].equals("-")){
+                // copy[k] = "#";
+                //}
             }
             else if (s[k - 1].equals("#") && s[k + 1].equals("#")) {
                 copy[k] = "-";
@@ -36,12 +36,15 @@ public class CellularAutomata {
             else {
                 String[] temp = new String[5];
                 System.arraycopy(s, k-2, temp, 0, 5);
-                if (Collections.frequency(Arrays.asList(temp), "#") > 3) {
-                    copy[k] = "-";
-                }
+                //if (Collections.frequency(Arrays.asList(temp), "#") > 3) {
+                //    copy[k] = "-";
+                //}
                 //if (Collections.frequency(Arrays.asList(temp), "#") > 4) { //This will create a fixed loop much sooner
                 //   copy[k] = "-";
                 //}
+                if (Collections.frequency(Arrays.asList(temp), "#") > 3 || Collections.frequency(Arrays.asList(temp), "#") < 2) {
+                    copy[k] = "-";
+                }
             }
         }
         s = copy;
@@ -54,12 +57,13 @@ public class CellularAutomata {
         String str2 = "---################################################################################---";
         String str3 = "-------------###--------#####-#----####---###------##-##-#-------#--##-#---#----##----";
         String str4 = "--------------------------------------------------------------------------------------";
+        String str5 = "-------#------------------------------------------------------------------------------";
         String str = str3;
         String[] s = str.split("");
         System.out.println(String.join(" ",s));
         ArrayList<String> output = new ArrayList<>();
         output.add(str);
-        for (int k = 1; k <= 100000; k += 1) {
+        for (int k = 1; k <= 1000000; k += 1) {
             output.add(String.join(" ",s));
             s = ca.update2(s); //Change this to update/update2 for different methods
             System.out.println(String.join(" ",s));
